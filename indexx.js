@@ -1,5 +1,17 @@
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const path = require('path')
+
+const directory = 'uploads'
+fs.readdir(directory, (err, files) => {
+    if(err) throw err;
+
+    for (const file of files) {
+        fs.unlink(path.join(directory, file), (err) => {
+            if (err) throw err;
+        })
+    }
+})
 
 // Create a document
 try {
@@ -159,7 +171,10 @@ try {
     const stream = fs.createWriteStream("uploads/" + pdfName)
 
     doc.pipe(stream);
-    
+    doc.image
+        // 'BernardoDiploma.png', 
+        // {width: doc.page.width, height: doc.page.height
+        ('BernardoDiplomaFinal2.png', 0,0, {width: doc.page.width, height: doc.page.height})
     doc
       .fontSize(52)
       .font('fonts/cloister-black.woff')
@@ -186,29 +201,22 @@ try {
     
     const distanceMargin = 18;
     
-    doc
-        .fillAndStroke('#7FB3D5')
-        .lineWidth(20)
-        .lineJoin('round')
-        .rect(
-            distanceMargin,
-            distanceMargin,
-            doc.page.width - distanceMargin * 2,
-            doc.page.height - distanceMargin * 2,
-        )
-        .stroke();
+    // doc
+    //     .fillAndStroke('#7FB3D5')
+    //     .lineWidth(20)
+    //     .lineJoin('round')
+    //     .rect(
+    //         distanceMargin,
+    //         distanceMargin,
+    //         doc.page.width - distanceMargin * 2,
+    //         doc.page.height - distanceMargin * 2,
+    //     )
+    //     .stroke();
     
         const maxWidth = 150;
         const maxHeight = 100;
-        doc.image(
-            'BernardoCollege.png',
-            doc.page.width / 2 - maxWidth / 2,
-            60, 
-            {
-            fit: [maxWidth, maxHeight],
-            align: 'center',
-            }
-        );
+       
+        
 
     doc
       .scale(0.6)
