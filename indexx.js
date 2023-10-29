@@ -17,9 +17,9 @@ fs.readdir(directory, (err, files) => {
 try {
     const studentID = '1023456789'
     const _id = '648ba3adfb78265eac4186a8'
-    const firstName = 'Ronald'
-    const middleName = 'Nibb'
-    const lastName = 'Peñaredondo'
+    const firstName = 'Titi'
+    const middleName = 'Ni'
+    const lastName = 'James'
     const adminSignature = '0x6bbf0e87e8fcf4ae81c50ff98a5d21d93d3d6c13b068922983cc5bc22f3aeb57239fd6cfe029cefd89d5c8c6555c5205a1180abda090dd282f6e01f8314267631c'
     const dateGraduated = new Date('2023-09-29T00:00:00.000+00:00')
         //https://en.wikipedia.org/wiki/Year_2038_problem
@@ -174,16 +174,15 @@ try {
     doc.image
         // 'BernardoDiploma.png', 
         // {width: doc.page.width, height: doc.page.height
-        ('BernardoDiplomaFinal2.png', 0,0, {width: doc.page.width, height: doc.page.height})
+        ('BernardoDiploma3.png', 0,0, {width: doc.page.width, height: doc.page.height})
     doc
       .fontSize(52)
       .font('fonts/cloister-black.woff')
-      .text(`${firstName} ${middleName.charAt(0)}. ${lastName}`, 100, 200);
-    
+      .text(`${firstName} ${middleName.charAt(0)}. ${lastName}`, 60, 175, {align: 'center'});
     doc
       .fontSize(26)
       .font('Helvetica-Bold')
-      .text(course, 74, 300);
+      .text(course, 75, 335,{align: 'center'});
 
     
     const date = translateToFilipino(dateGraduated)
@@ -191,12 +190,12 @@ try {
     doc
       .fontSize(22)
       .font('fonts/itc-edwardian-script-2.woff')
-      .text(`Nilagdaan sa lungsod ng Las Piñas, Pilipinas ngayong ika - ${date.day} ng ${date.month}`, 150, 400);
+      .text(`${date.day} ng ${date.month}`, 573, 417);
 
     doc
-        .fontSize(22)
+        .fontSize(20)
         .font('fonts/itc-edwardian-script-2.woff')
-        .text(`Taon ng ating Panginoon. Dalawang Libo't ${date.year}`, 350, 450);
+        .text(`Dalawang Libo't ${date.year}`, 435, 450);
 
     
     const distanceMargin = 18;
