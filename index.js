@@ -1,5 +1,19 @@
 const PDFDocument = require('pdfkit');
-const fs = require('fs');
+const fs = require("fs");
+const path = require("path");
+
+const directory = "uploads";
+
+fs.readdir(directory, (err, files) => {
+    if (err) throw err;
+
+    console.log(files)
+  for (const file of files) {
+    fs.unlink(path.join(directory, file), (err) => {
+      if (err) throw err;
+    });
+  }
+});
 
 // Create a document
 try {
