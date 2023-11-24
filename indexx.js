@@ -263,13 +263,13 @@ const dateToEnglish = (date) => {
 try {
     const studentID = '1023456789'
     const _id = '648ba3adfb78265ea'
-    const firstName = 'Ronaldaaaiaodfjall-testafterdashuihrjim9trehim9j0rthev89ujrhtve9ru8mthver8tvu9ehru9etvh'
+    const firstName = 'Ronaldaaaiaodfjall'
     const middleName = 'Ni'
     const lastName = 'Peñaredondo'
     const adminSignature = '0x6bbf0e87e8fcf4ae81c50ff98a5d21d93d3d6c13b068922983cc5bc22f3aeb57239fd6cfe029cefd89d5c8c6555c5205a1180abda090dd282f6e01f8314267631c'
     const dateGraduated = new Date('2023-09-29T00:00:00.000+00:00')
         //https://en.wikipedia.org/wiki/Year_2038_problem - not a problem
-    const course = 'TWO-YEAR ASSOCIATE IN COMPUTER TECHNOLOGY'
+    const course = 'BS Business Administration Major in Marketing Management'
 
     const doc = new PDFDocument({
         layout: 'landscape',
@@ -333,10 +333,42 @@ try {
         .font('Closter-Black')
         .text(`${firstName} ${middleName.charAt(0)}. ${lastName}`, 68, fullNameY, {align: 'center'})
 
+    let courseFontSize = 23
+    let courseIsCentered = false
+    let courseWidth = null
+
+    do {
+        courseWidth = parseFloat(
+            doc
+                .fontSize(courseFontSize)
+                .font('Helvetica-Bold')
+                .widthOfString(course, 75, 335, {align: 'center'})
+                .toFixed(2)
+        )
+
+        if(courseWidth <= 665.85) {
+            courseIsCentered = true;
+        } else {
+            courseFontSize = parseFloat((courseFontSize - 0.1).toFixed(2))
+        }
+    } while (courseIsCentered == false)
+
+    let courseY = 335
+
+    const courseLineHeight = parseFloat(
+        doc
+            .fontSize(courseFontSize)
+            .font('Helvetica-Bold')
+            .heightOfString(course, 75, 335, {align: 'center'})
+            .toFixed(2)
+    )
+
+    courseY = courseY + ((27.2 - courseLineHeight) * 0.5)
+
     doc
-        .fontSize(26)
+        .fontSize(courseFontSize)
         .font('Helvetica-Bold')
-        .text(course, 75, 335, {align: 'center'});
+        .text(course, 75, courseY, {align: 'center'});
 
     doc
         .fontSize(22)
